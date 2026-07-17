@@ -1,0 +1,51 @@
+# Finite State Automata (FSA)
+# M = (Q, Σ, δ, q0, F)
+
+# Q = States
+states = {'q0', 'q1', 'q2', 'q3'}
+
+# Σ = Input Alphabet
+alphabet = {'c', 'a', 't'}
+
+# δ = Transition Function
+transition = {
+    ('q0', 'c'): 'q1',
+    ('q1', 'a'): 'q2',
+    ('q2', 't'): 'q3'
+}
+
+# q0 = Initial State
+start_state = 'q0'
+
+# F = Final (Accepting) State
+final_states = {'q3'}
+
+# Function to simulate FSA
+def run_fsa(input_string):
+    current_state = start_state
+
+    for symbol in input_string:
+        if (current_state, symbol) in transition:
+            current_state = transition[(current_state, symbol)]
+        else:
+            return "Rejected"
+
+    if current_state in final_states:
+        return "Accepted"
+    else:
+        return "Rejected"
+
+
+# Main Program
+word = input("Enter a word: ").lower()
+
+print("\nFSA Model")
+print("States (Q):", states)
+print("Alphabet (Σ):", alphabet)
+print("Initial State (q0):", start_state)
+print("Final State (F):", final_states)
+
+result = run_fsa(word)
+
+print("\nInput :", word)
+print("Output:", result)
